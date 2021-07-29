@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinancialControl.Views.CategoriesList"
+             xmlns:local="clr-namespace:FinancialControl.Assets" 
+             Title="Categorias" >
+    <ContentPage.Content>
+        <StackLayout Style="{ StaticResource MainStackLayout }" >
+            <Frame   HorizontalOptions="FillAndExpand" >
+                <Button x:Name="BtnAddCategory" Text="Adicionar Categoria" CornerRadius="10" FontFamily="FontBold" Command="{Binding CreateCategoryCommand}" BackgroundColor="#003300" TextColor="#fff"/>
+            </Frame>
+            <Frame Margin="0,-25,0,-15">
+                <StackLayout >
+                    <StackLayout >
+                        <Entry Placeholder="Buscar por Nome" FontFamily="FontRegular"  PlaceholderColor="#737373" TextColor="Black"  x:Name="EntSearchTitle" TextTransform="Uppercase" BackgroundColor="White" />
+                    </StackLayout>
+                    <ListView x:Name="CategoriesListView" ItemsSource="{Binding Categories}" CachingStrategy="RecycleElement" Style="{ StaticResource DefaultListView }"  >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame Margin="1" BackgroundColor="WhiteSmoke">
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
+                                            <Grid x:Name="Item" HorizontalOptions="FillAndExpand">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="30"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition  Width ="6*" />
+                                                    <ColumnDefinition  Width ="4*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Start" MaxLines="1"
+                                                   LineBreakMode="TailTruncation" FontSize="22" FontFamily="FontRegular" 
+                                                    TextColor="Black" VerticalOptions="StartAndExpand" Text="{Binding Name}" />
+                                                <!--BorderRadius = WidthRequest / 2 BorderRadius = HeightRequest / 2-->
+                                                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1"  HorizontalOptions="FillAndExpand">
+                                                    <Button BackgroundColor="#E5CB42" CornerRadius="10" WidthRequest="60" BorderColor="Black"
+                                                            BindingContext="{Binding Source={x:Reference CategoriesListView}, Path=BindingContext}"  
+                                                            Command="{Binding UpdateCategoryCommand}"   
+                                                            CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"                                                           
+                                                            >
+                                                        <Button.ImageSource>
+                                                            <FontImageSource FontFamily="MaterialIcons" Color="Black"  Glyph="{x:Static local:Icons.Edit}" Size="20" ></FontImageSource>
+                                                        </Button.ImageSource>
+                                                    </Button>
+                                                    <Button  BackgroundColor="#973737" CornerRadius="10"  WidthRequest="60" BorderColor="Black"
+                                                             BindingContext="{Binding Source={x:Reference CategoriesListView}, Path=BindingContext}"  
+                                                             Command="{Binding DeleteCategoryCommand}"   
+                                                             CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" 
+                                                             >
+                                                        <Button.ImageSource>
+                                                            <FontImageSource FontFamily="MaterialIcons" Color="White"  Glyph="{x:Static local:Icons.Delete}" Size="17" ></FontImageSource>
+                                                        </Button.ImageSource>
+                                                    </Button>
+                                                </StackLayout>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

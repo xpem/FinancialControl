@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinancialControl.Views.Account.AccountList"
+    xmlns:local="clr-namespace:FinancialControl.Assets" 
+             Title="Contas" >
+    <ContentPage.Content>
+        <StackLayout  Style="{ StaticResource MainStackLayout }" >
+            <Frame   HorizontalOptions="FillAndExpand" >
+                <Button x:Name="BtnAddCategory" Text="Adicionar Conta" CornerRadius="10" FontFamily="FontBold" BackgroundColor="#003300" TextColor="#fff"/>
+            </Frame>
+            <Frame Margin="0,-25,0,-15">
+                <StackLayout >
+                    <StackLayout >
+                        <Entry Placeholder="Buscar por Nome" FontFamily="FontRegular"  PlaceholderColor="#737373" TextColor="Black"  x:Name="EntSearch" TextTransform="Uppercase" BackgroundColor="White" />
+                    </StackLayout>
+                    <ListView x:Name="CategoriesListView" CachingStrategy="RecycleElement" ItemsSource="{Binding Accounts}" 
+                           Style="{ StaticResource DefaultListView }"  >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame Margin="1" BackgroundColor="WhiteSmoke">
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
+                                            <Grid x:Name="Item" HorizontalOptions="FillAndExpand">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="30"/>
+                                                    <RowDefinition Height="30"/>
+                                                </Grid.RowDefinitions>
+                                                <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Start" MaxLines="1"
+                                                   LineBreakMode="TailTruncation" FontSize="22" FontFamily="FontBrands" 
+                                                    TextColor="Black" VerticalOptions="StartAndExpand" Text="{Binding Name}" />
+                                                <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0"  HorizontalOptions="FillAndExpand">
+                                                    <Label  VerticalTextAlignment="Start" MaxLines="1"
+                                                    FontSize="12" FontFamily="FontLight" FontAttributes="Italic"
+                                                    TextColor="Black" VerticalOptions="StartAndExpand" Text="Valor na conta: " />
+                                                    <Label VerticalTextAlignment="Start" MaxLines="1"
+                                                    FontSize="12" FontFamily="FontBold" FontAttributes="Italic"
+                                                    TextColor="Black" VerticalOptions="StartAndExpand" Text="{Binding Value}" />
+                                                </StackLayout>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
