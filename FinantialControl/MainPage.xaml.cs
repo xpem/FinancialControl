@@ -17,7 +17,7 @@ namespace FinancialControl
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            _ = Navigation.PushAsync(new Views.CategoriesList());
+            _ = Navigation.PushAsync(new Views.CategoryList());
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)

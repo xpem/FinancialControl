@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinancialControl.Views.Account.AccountForm"
+             xmlns:local="clr-namespace:FinancialControl.Assets" BackgroundColor="#C4C4C4"
+             >
+    <ContentPage.Content>
+        <StackLayout  Style="{ StaticResource MainStackLayout }" >
+            <Label VerticalTextAlignment="Start" FontSize="14" FontFamily="FontRegular" TextColor="Black" VerticalOptions="Start" Text="Conta:" />
+            <Entry FontFamily="FontRegular" TextColor="Black" BackgroundColor="White" />
+            <Label VerticalTextAlignment="Start" FontSize="14" FontFamily="FontRegular" TextColor="Black" VerticalOptions="Start" Text="Valor Inicial:" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label VerticalOptions="Center"  VerticalTextAlignment="Start" FontFamily="FontLight" FontAttributes="Italic" 
+             TextColor="Black" Text="R$ " />
+                <Entry FontFamily="FontRegular" TextColor="Black" BackgroundColor="White" WidthRequest="150" />
+            </StackLayout>
+            <Label VerticalTextAlignment="Start" FontSize="14" FontFamily="FontRegular" TextColor="Black" VerticalOptions="Start" Text="Descrição:" />
+            <Editor FontFamily="FontRegular" TextColor="Black" BackgroundColor="White" HeightRequest="60" MaxLength="200" Keyboard="Chat" />
+            <Button Text="Adicionar Conta" CornerRadius="10" FontFamily="FontBold" BackgroundColor="#003300" TextColor="#fff" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

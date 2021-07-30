@@ -1,12 +1,7 @@
-﻿using FinancialControl.ViewModels.Account;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using FinancialControl.ViewModels.Account;
 
 namespace FinancialControl.Views.Account
 {
@@ -17,7 +12,12 @@ namespace FinancialControl.Views.Account
         {
             InitializeComponent();
 
-            BindingContext = new AccountListViewModel();
+            BindingContext = new AccountListVM();
+        }
+
+        private void BtnAddAccount_Clicked(object sender, EventArgs e)
+        {
+            _ = Navigation.PushAsync(new AccountForm());
         }
     }
 }

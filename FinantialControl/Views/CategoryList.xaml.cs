@@ -10,14 +10,14 @@ using Xamarin.Forms.Xaml;
 namespace FinancialControl.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CategoriesList : ContentPage
+    public partial class CategoryList : ContentPage
     {
 
-        public CategoriesList()
+        public CategoryList()
         {
             InitializeComponent();
 
-            BindingContext = new CategoriesListViewModel();
+            BindingContext = new CategoryListVM();
 
         }
     }

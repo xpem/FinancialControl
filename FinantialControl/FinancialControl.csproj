@@ -55,10 +55,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CategoryList.xaml.cs">
+      <DependentUpon>CategoryList.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\Account\AccountForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Account\AccountList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CategoriesList.xaml">
+    <EmbeddedResource Update="Views\CategoryList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

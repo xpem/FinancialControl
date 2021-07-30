@@ -7,7 +7,8 @@
     <ContentPage.Content>
         <StackLayout  Style="{ StaticResource MainStackLayout }" >
             <Frame   HorizontalOptions="FillAndExpand" >
-                <Button x:Name="BtnAddCategory" Text="Adicionar Conta" CornerRadius="10" FontFamily="FontBold" BackgroundColor="#003300" TextColor="#fff"/>
+                <Button x:Name="BtnAddAccount" Text="Adicionar Conta" CornerRadius="10" FontFamily="FontBold"
+                        BackgroundColor="#003300" TextColor="#fff" Clicked="BtnAddAccount_Clicked"/>
             </Frame>
             <Frame Margin="0,-25,0,-15">
                 <StackLayout >

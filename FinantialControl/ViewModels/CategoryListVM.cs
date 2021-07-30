@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 
 namespace FinancialControl.ViewModels
 {
-    public class CategoriesListViewModel : INotifyPropertyChanged
+    public class CategoryListVM : INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -41,7 +41,7 @@ namespace FinancialControl.ViewModels
         private ObservableCollection<Category> categories;
         public ObservableCollection<Category> Categories { get { return categories; } set { categories = value; Notify(); } }
 
-        public CategoriesListViewModel()
+        public CategoryListVM()
         {
             //CreateCategoryCommand = new Command(CreateCategoryCmd);
             //UpdateCategoryCommand = new Command(UpdateCategoryCmd);

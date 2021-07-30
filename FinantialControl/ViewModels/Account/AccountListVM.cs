@@ -8,7 +8,7 @@ using ModelLayer;
 
 namespace FinancialControl.ViewModels.Account
 {
-    public class AccountListViewModel
+    public class AccountListVM
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -20,7 +20,7 @@ namespace FinancialControl.ViewModels.Account
         private ObservableCollection<ModelLayer.Account> accounts;
         public ObservableCollection<ModelLayer.Account> Accounts { get { return accounts; } set { accounts = value; Notify(); } }
 
-        public AccountListViewModel()
+        public AccountListVM()
         {
             Accounts = new ObservableCollection<ModelLayer.Account>()
             {
