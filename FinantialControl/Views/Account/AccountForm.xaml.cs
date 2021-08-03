@@ -1,5 +1,8 @@
-﻿using System;
+﻿using FinancialControl.ViewModels.Account;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +18,7 @@ namespace FinancialControl.Views.Account
         public AccountForm()
         {
             InitializeComponent();
+            this.BindingContext = new AccountFormVM(this.Navigation); ;
         }
     }
 }

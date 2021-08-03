@@ -51,7 +51,7 @@ namespace FinancialControl.ViewModels
                 new Category(){ Id=0,Name="teste a"},
                 new Category(){ Id=1,Name="teste b"},
                 new Category(){ Id=2,Name="teste c"},
-                new Category(){ Id=3,Name="teste d"},
+                new Category(){ Id=3,Name="teste d"}
             };
         }
 
