@@ -19,7 +19,7 @@
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                 <Label VerticalOptions="Center"  VerticalTextAlignment="Start" FontFamily="FontLight" FontAttributes="Italic" 
              TextColor="Black" Text="R$ " />
-                <Entry x:Name="NumbertoMoney" Keyboard="Numeric"
+                <Entry x:Name="NumbertoMoney" Keyboard="Numeric"  TextColor="Black" BackgroundColor="White" WidthRequest="150"
                 Text="{Binding NumbertoMoney, Converter={StaticResource CurrencyConverter}}"/>
             </StackLayout>
             <Label VerticalTextAlignment="Start" FontSize="14" FontFamily="FontRegular" TextColor="Black" VerticalOptions="Start" Text="Descrição:" />

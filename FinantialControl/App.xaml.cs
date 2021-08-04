@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLayer;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,6 +9,13 @@ namespace FinancialControl
     {
         public App()
         {
+            //
+            CrtUptDatabase crtUptDatabase = new CrtUptDatabase();
+
+            //
+            crtUptDatabase.CrtUptDbLocal();
+
+
             InitializeComponent();
 
             Current.MainPage = new MainPage();
