@@ -3,11 +3,18 @@ using ModelLayer;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AccessLayer.Sqlite
 {
     public class CrtUptDatabase : Sqlite
     {
+
+        /// <summary>
+        /// to recreate a table up his version
+        /// </summary>
+        public static VersionDb ActualVersionDb = new VersionDb() { Account = 2 };
+
         /// <summary>
         /// Create or update the local database
         /// </summary>
@@ -19,8 +26,9 @@ namespace AccessLayer.Sqlite
             _ = RunSqliteCommand("CREATE TABLE IF NOT EXISTS DbVersion(Key INTEGER, Account INTEGER);");
 
             //account
-            _ = RunSqliteCommand("CREATE TABLE IF NOT EXISTS Account(Id INTEGER PRIMARY KEY AUTOINCREMENT, Key TEXT, LastUpdate DATETIME,NAME TEXT, Value TEXT, Description TEXT)");
+            _ = RunSqliteCommand("CREATE TABLE IF NOT EXISTS Account(Id INTEGER PRIMARY KEY AUTOINCREMENT, Key TEXT, LastUpdate DATETIME,Name TEXT, Value TEXT, Description TEXT)");
 
+            CloseIfOpen();
         }
 
         /// <summary>
@@ -30,7 +38,7 @@ namespace AccessLayer.Sqlite
         {
             VersionDb versionDb;
 
-            using (SqliteDataReader Retorno = RunSqliteCommand("select ACCOUNT from DBVERSION"))
+            using (SqliteDataReader Retorno = Task.Run(async () => await RunSqliteCommand("select ACCOUNT from DBVERSION")).Result)
             {
                 _ = Retorno.Read();
 
@@ -38,15 +46,14 @@ namespace AccessLayer.Sqlite
                 {
                     versionDb = new VersionDb()
                     {
-                        Account = Retorno.GetWithNullableInt(0),
+                        Account = Retorno.GetWithNullableInt(0)
                     };
-
                 }
                 else
                 {
                     versionDb = new VersionDb()
                     {
-                        Account = 0,
+                        Account = 0
                     };
                     CrtorUptVersionDb(false, versionDb);
                 }
