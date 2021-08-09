@@ -13,7 +13,7 @@ namespace AccessLayer.Sqlite
         /// <summary>
         /// to recreate a table up his version
         /// </summary>
-        public static VersionDb ActualVersionDb = new VersionDb() { Account = 2 };
+        public static VersionDb ActualVersionDb = new VersionDb() { Account = 4 };
 
         /// <summary>
         /// Create or update the local database
@@ -22,11 +22,13 @@ namespace AccessLayer.Sqlite
         {
             OpenIfClosed();
 
+            VerifyDbVersions();
+
             //dbVersion
-            _ = RunSqliteCommand("CREATE TABLE IF NOT EXISTS DbVersion(Key INTEGER, Account INTEGER);");
+            _ = RunSqliteCommand("CREATE TABLE IF NOT EXISTS DbVersion(Key INTEGER, Account INTEGER)");
 
             //account
-            _ = RunSqliteCommand("CREATE TABLE IF NOT EXISTS Account(Id INTEGER PRIMARY KEY AUTOINCREMENT, Key TEXT, LastUpdate DATETIME,Name TEXT, Value TEXT, Description TEXT)");
+            _ = RunSqliteCommand("CREATE TABLE IF NOT EXISTS Account(Id INTEGER PRIMARY KEY AUTOINCREMENT, Key TEXT,UserKey TEXT, LastUpdate DATETIME,Name TEXT, Value TEXT, Description TEXT)");
 
             CloseIfOpen();
         }
@@ -38,7 +40,7 @@ namespace AccessLayer.Sqlite
         {
             VersionDb versionDb;
 
-            using (SqliteDataReader Retorno = Task.Run(async () => await RunSqliteCommand("select ACCOUNT from DBVERSION")).Result)
+            using (SqliteDataReader Retorno = Task.Run(async () => await RunSqliteCommand("select ACCOUNT from DbVersion")).Result)
             {
                 _ = Retorno.Read();
 
@@ -63,7 +65,7 @@ namespace AccessLayer.Sqlite
 
             if (versionDb.Account < ActualVersionDb.Account)
             {
-                _ = RunSqliteCommand("drop table if exists ACESSADD");
+                _ = RunSqliteCommand("drop table if exists Account");
 
                 atualizarVersaoDb = true;
             }

@@ -3,28 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FinancialControl.Views.Account.AccountForm"
              xmlns:util="clr-namespace:FinancialControl.Utils.Converters;assembly=FinancialControl"
-             xmlns:local="clr-namespace:FinancialControl.Assets" BackgroundColor="#C4C4C4"
-             Padding="0,50,0,0"
-             >
+             xmlns:local="clr-namespace:FinancialControl.Assets" xmlns:account="clr-namespace:FinancialControl.ViewModels.Account" x:DataType="account:AccountFormVM" BackgroundColor="#C4C4C4"
+             Padding="0,50,0,0" >
     <ContentPage.Resources>
         <ResourceDictionary>
             <util:CurrencyConverter x:Key="CurrencyConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout  Style="{ StaticResource MainStackLayout }" >
+        <StackLayout Style="{ StaticResource MainStackLayout }" >
             <Label VerticalTextAlignment="Start" FontSize="14" FontFamily="FontRegular" TextColor="Black" VerticalOptions="Start" Text="Conta:" />
-            <Entry FontFamily="FontRegular" TextColor="Black" BackgroundColor="White" />
+            <Entry FontFamily="FontRegular" Style="{ StaticResource DefaultEntry }"  Text="{Binding Name}"/>
             <Label VerticalTextAlignment="Start" FontSize="14" FontFamily="FontRegular" TextColor="Black" VerticalOptions="Start" Text="Valor Inicial:" />
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label VerticalOptions="Center"  VerticalTextAlignment="Start" FontFamily="FontLight" FontAttributes="Italic" 
-             TextColor="Black" Text="R$ " />
-                <Entry x:Name="NumbertoMoney" Keyboard="Numeric"  TextColor="Black" BackgroundColor="White" WidthRequest="150"
-                Text="{Binding NumbertoMoney, Converter={StaticResource CurrencyConverter}}"/>
+                <Label VerticalOptions="Center" VerticalTextAlignment="Start" FontFamily="FontLight" FontAttributes="Italic" TextColor="Black" Text="R$ " />
+                <Entry x:Name="Value" Keyboard="Numeric" Style="{ StaticResource DefaultEntry }" WidthRequest="150" Text="{Binding Value, Converter={StaticResource CurrencyConverter}}" />
             </StackLayout>
             <Label VerticalTextAlignment="Start" FontSize="14" FontFamily="FontRegular" TextColor="Black" VerticalOptions="Start" Text="Descrição:" />
-            <Editor FontFamily="FontRegular" TextColor="Black" BackgroundColor="White" HeightRequest="60" MaxLength="200" Keyboard="Chat" />
-            <Button Text="Adicionar Conta" CornerRadius="10" FontFamily="FontBold" BackgroundColor="#003300" TextColor="#fff" />
+            <Editor FontFamily="FontRegular" Style="{ StaticResource DefaultEntry }" HeightRequest="60" MaxLength="200" Keyboard="Chat" Text="{Binding Description}" />
+            <Button Text="Adicionar Conta" Command="{Binding CreateAccountCommand}" CornerRadius="10" FontFamily="FontBold" BackgroundColor="#003300" TextColor="#fff" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

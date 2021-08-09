@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-   public class Accounts
+    public class Accounts
     {
         public async Task CreateAccount(Account account)
         {
             await new AccessLayer.Accounts.AccountsLocal().CreateAccount(account);
+        }
+
+        public async Task<List<ModelLayer.Account>> GetAccounts()
+        {
+            return await new AccessLayer.Accounts.AccountsLocal().GetAccounts();
         }
     }
 }

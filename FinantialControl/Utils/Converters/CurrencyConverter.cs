@@ -15,14 +15,16 @@ namespace FinancialControl.Utils.Converters
     public class CurrencyConverter : IValueConverter
     {
         //"N", new CultureInfo("pt-BR",false)
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object Value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Decimal.Parse(value.ToString()).ToString("N", new CultureInfo("pt-BR", false));
+            if(Value is null) { Value = "0"; }
+
+            return Decimal.Parse(Value.ToString()).ToString("N", new CultureInfo("pt-BR", false));
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object Value, Type targetType, object parameter, CultureInfo culture)
         {
-            string valueFromString = Regex.Replace(value.ToString(), @"\D", "");
+            string valueFromString = Regex.Replace(Value.ToString(), @"\D", "");
 
             if (valueFromString.Length <= 0)
                 return 0m;
