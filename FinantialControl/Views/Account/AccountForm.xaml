@@ -21,7 +21,11 @@
             </StackLayout>
             <Label VerticalTextAlignment="Start" FontSize="14" FontFamily="FontRegular" TextColor="Black" VerticalOptions="Start" Text="Descrição:" />
             <Editor FontFamily="FontRegular" Style="{ StaticResource DefaultEntry }" HeightRequest="60" MaxLength="200" Keyboard="Chat" Text="{Binding Description}" />
-            <Button Text="Adicionar Conta" Command="{Binding CreateAccountCommand}" CornerRadius="10" FontFamily="FontBold" BackgroundColor="#003300" TextColor="#fff" />
+            <Button Text="Adicionar Conta" Command="{Binding CreateEditAccountCommand}" CornerRadius="10" FontFamily="FontBold" BackgroundColor="#003300" TextColor="#fff" >
+                <Button.ImageSource>
+                    <FontImageSource FontFamily="MaterialIcons" Color="White"  Glyph="{x:Static local:Icons.Add}" ></FontImageSource>
+                </Button.ImageSource>
+            </Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

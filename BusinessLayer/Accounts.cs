@@ -10,12 +10,30 @@ namespace BusinessLayer
     {
         public async Task CreateAccount(Account account)
         {
+            //gera um id local temporário único
+            account.Key = Guid.NewGuid().ToString();
+
             await new AccessLayer.Accounts.AccountsLocal().CreateAccount(account);
         }
 
-        public async Task<List<ModelLayer.Account>> GetAccounts()
+        public async Task UpdateAccount(Account account)
+        {
+            await new AccessLayer.Accounts.AccountsLocal().UpdateAccount(account);
+        }
+
+        public async Task<List<Account>> GetAccounts()
         {
             return await new AccessLayer.Accounts.AccountsLocal().GetAccounts();
+        }
+
+        public async Task<Account> GetAccount(int id)
+        {
+            return await new AccessLayer.Accounts.AccountsLocal().GetAccount(id);
+        }
+
+        public async Task<bool> VerifyAccountByName(string name)
+        {
+            return await new AccessLayer.Accounts.AccountsLocal().VerifyAccountByName(name);
         }
     }
 }

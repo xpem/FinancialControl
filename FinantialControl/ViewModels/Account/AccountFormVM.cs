@@ -1,4 +1,5 @@
 ﻿using FinancialControl.Utils;
+using FinancialControl.Views.Account;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +11,8 @@ namespace FinancialControl.ViewModels.Account
 {
     public class AccountFormVM : ObservableObject
     {
-        private INavigation _navigation;
+        private readonly int id;
+        private readonly string nameOri;
 
         #region ui objects
 
@@ -19,10 +21,9 @@ namespace FinancialControl.ViewModels.Account
         public string Value { get => value; set { this.value = value; OnPropertyChanged(); } }
         public string Description { get => description; set { description = value; OnPropertyChanged(); } }
 
-
         #endregion
 
-        public ICommand CreateAccountCommand
+        public ICommand CreateEditAccountCommand
         {
             get
             {
@@ -30,8 +31,17 @@ namespace FinancialControl.ViewModels.Account
                 {
                     if (await ValidateInputs())
                     {
-                        ModelLayer.Account account = new ModelLayer.Account() { Name = Name, Value = Value, Description = Description };
-                        _ = new BusinessLayer.Accounts().CreateAccount(account);
+                        if (id == 0)
+                        {
+                            ModelLayer.Account account = new ModelLayer.Account() { Name = Name, Value = Value, Description = Description };
+                            _ = new BusinessLayer.Accounts().CreateAccount(account);
+                        }
+                        else
+                        {
+                            ModelLayer.Account account = new ModelLayer.Account() { Id = id, Name = Name, Value = Value, Description = Description };
+                            _ = new BusinessLayer.Accounts().UpdateAccount(account);
+                        }
+                        Application.Current.MainPage = new NavigationPage(new AccountList());
                     }
                 });
             }
@@ -43,8 +53,16 @@ namespace FinancialControl.ViewModels.Account
             {
                 await Application.Current.MainPage.DisplayAlert("Aviso", "Insira um nome para sua conta", "Voltar");
                 return false;
-
             }
+            else
+            {
+                if (((id == 0) || (nameOri != name)) && await new BusinessLayer.Accounts().VerifyAccountByName(Name))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Aviso", "Já existe uma conta cadastrada com este nome", "Voltar");
+                    return false;
+                }
+            }            
+
             if (string.IsNullOrEmpty(value))
             {
                 if (!decimal.TryParse(Value, out _))
@@ -57,9 +75,16 @@ namespace FinancialControl.ViewModels.Account
             return true;
         }
 
-        public AccountFormVM(INavigation navigation)
+        public AccountFormVM(INavigation navigation, int _id)
         {
-
+            if (_id > 0)
+            {
+                ModelLayer.Account account = Task.Run(async () => await new BusinessLayer.Accounts().GetAccount(_id)).Result;
+                id = account.Id;
+               nameOri = Name = account.Name;
+                Value = account.Value;
+                Description = account.Description;
+            }
         }
     }
 }

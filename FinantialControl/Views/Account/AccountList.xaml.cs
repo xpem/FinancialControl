@@ -12,12 +12,12 @@ namespace FinancialControl.Views.Account
         {
             InitializeComponent();
 
-            BindingContext = new AccountListVM();
+            BindingContext = new AccountListVM(Navigation);
         }
 
         private void BtnAddAccount_Clicked(object sender, EventArgs e)
         {
-            _ = Navigation.PushAsync(new AccountForm());
+            _ = Navigation.PushAsync(new AccountForm(0));
         }
     }
 }

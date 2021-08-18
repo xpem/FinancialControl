@@ -1,4 +1,5 @@
-﻿using ModelLayer;
+﻿using FinancialControl.Utils;
+using ModelLayer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,34 +13,22 @@ using Xamarin.Forms.Xaml;
 
 namespace FinancialControl.ViewModels
 {
-    public class CategoryListVM : INotifyPropertyChanged
+    public class CategoryListVM : ObservableObject
     {
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void Notify([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
 
         Category _selectedCategory;
         public Category SelectedCategory
         {
-            get
-            {
-                return _selectedCategory;
-            }
-
+            get =>  _selectedCategory;
             set
             {
                 _selectedCategory = value;
-                Notify("SelectedCategory");
-
+                OnPropertyChanged("SelectedCategory");
             }
         }
 
         private ObservableCollection<Category> categories;
-        public ObservableCollection<Category> Categories { get { return categories; } set { categories = value; Notify(); } }
+        public ObservableCollection<Category> Categories { get { return categories; } set { categories = value; OnPropertyChanged(); } }
 
         public CategoryListVM()
         {

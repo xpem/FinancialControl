@@ -2,21 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FinancialControl.Views.Account.AccountList"
-             xmlns:local="clr-namespace:FinancialControl.Assets" xmlns:account="clr-namespace:FinancialControl.ViewModels.Account" x:DataType="account:AccountListVM"
-             Title="Contas" >
+             xmlns:local="clr-namespace:FinancialControl.Assets" 
+             xmlns:accountList="clr-namespace:FinancialControl.ViewModels.Account"
+             xmlns:account="clr-namespace:ModelLayer;assembly=ModelLayer" 
+             Title="Contas">
     <ContentPage.Content>
-        <StackLayout  Style="{ StaticResource MainStackLayout }" >
-            <Frame   HorizontalOptions="FillAndExpand" >
+        <StackLayout  Style="{ StaticResource MainStackLayout }">
+            <Frame   HorizontalOptions="FillAndExpand">
                 <Button x:Name="BtnAddAccount" Text="Adicionar Conta" CornerRadius="10" FontFamily="FontBold"
-                        BackgroundColor="#003300" TextColor="#fff" Clicked="BtnAddAccount_Clicked"/>
+                        BackgroundColor="#003300" TextColor="#fff" Clicked="BtnAddAccount_Clicked">
+                    <Button.ImageSource>
+                        <FontImageSource FontFamily="MaterialIcons" Color="White" Glyph="{x:Static local:Icons.Add}"></FontImageSource>
+                    </Button.ImageSource>
+                </Button>
             </Frame>
             <Frame Margin="0,-25,0,-15">
-                <StackLayout >
-                    <StackLayout >
-                        <Entry Placeholder="Buscar por Nome" FontFamily="FontRegular"  PlaceholderColor="#737373" TextColor="Black"  x:Name="EntSearch" TextTransform="Uppercase" BackgroundColor="White" />
+                <StackLayout>
+                    <StackLayout>
+                        <Entry Placeholder="Buscar por Nome" FontFamily="FontRegular" PlaceholderColor="#737373" TextColor="Black" x:Name="EntSearch" TextTransform="Uppercase" BackgroundColor="White" />
                     </StackLayout>
-                    <ListView x:Name="CategoriesListView" CachingStrategy="RecycleElement" ItemsSource="{Binding AccountsList}" 
-                           Style="{ StaticResource DefaultListView }"  >
+                    <ListView x:DataType="accountList:AccountListVM" x:Name="CategoriesListView" CachingStrategy="RecycleElement" ItemsSource="{Binding AccountsList}" 
+                           Style="{ StaticResource DefaultListView }" SelectedItem="{Binding Account, Mode=TwoWay }" HasUnevenRows="True" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -29,14 +35,13 @@
                                                 </Grid.RowDefinitions>
                                                 <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Start" MaxLines="1"
                                                    LineBreakMode="TailTruncation" FontSize="22" FontFamily="FontBrands" 
-                                                    TextColor="Black" VerticalOptions="StartAndExpand" Text="{Binding Name}" />
+                                                    TextColor="Black" VerticalOptions="StartAndExpand" x:DataType="account:Account" Text="{Binding Name}" />
                                                 <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0"  HorizontalOptions="FillAndExpand">
                                                     <Label  VerticalTextAlignment="Start" MaxLines="1"
                                                     FontSize="12" FontFamily="FontLight" FontAttributes="Italic"
                                                     TextColor="Black" VerticalOptions="StartAndExpand" Text="Valor na conta: " />
-                                                    <Label VerticalTextAlignment="Start" MaxLines="1"
-                                                    FontSize="12" FontFamily="FontBold" FontAttributes="Italic"
-                                                    TextColor="Black" VerticalOptions="StartAndExpand" Text="{Binding Value}" />
+                                                    <Label VerticalTextAlignment="Start" MaxLines="1" FontSize="12" FontFamily="FontBold" FontAttributes="Italic"
+                                                    TextColor="Black" VerticalOptions="StartAndExpand" x:DataType="account:Account" Text="{Binding Value, StringFormat='{0:C0}'}" />
                                                 </StackLayout>
                                             </Grid>
                                         </StackLayout>

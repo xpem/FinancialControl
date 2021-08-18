@@ -13,7 +13,7 @@ namespace AccessLayer.Sqlite
         /// <summary>
         /// to recreate a table up his version
         /// </summary>
-        public static VersionDb ActualVersionDb = new VersionDb() { Account = 4 };
+        public static VersionDb ActualVersionDb = new VersionDb() { Account = 5 };
 
         /// <summary>
         /// Create or update the local database
